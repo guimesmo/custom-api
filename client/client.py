@@ -14,7 +14,7 @@ Available commands:
 import sys
 import pprint
 
-from todo_list import create_todo_list, view_todo_list
+from todo_list import create_todo_list, view_todo_list, delete_todo_list, add_list_item
 
 
 def main():
@@ -28,9 +28,23 @@ def main():
             print("The name is required for todo list")
             exit(0)
 
-    if action == 'view-list':
+    elif action == 'view-list':
         try:
             pprint.pprint(view_todo_list(sys.argv[2]))
+        except IndexError:
+            print("The id is required for todo list view")
+            exit(0)
+
+    elif action == 'delete-list':
+        try:
+            pprint.pprint(delete_todo_list(sys.argv[2]))
+        except IndexError:
+            print("The id is required for todo list delete")
+            exit(0)
+
+    elif action == 'add-list-item':
+        try:
+            pprint.pprint(add_list_item(sys.argv[2], sys.argv[3]))
         except IndexError:
             print("The id is required for todo list view")
             exit(0)

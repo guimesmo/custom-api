@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.urls import path
 
-from todo_list.views import TodoListAPIView, TodoListDetailAPIView
+from todo_list.views import TodoListAPIView, TodoListRetrieveAPIView
 from user.views import UserView
 
 urlpatterns = [
     path('register/', UserView.as_view()),
-    path('list/', TodoListAPIView.as_view()),
-    path('list/<int:pk>', TodoListDetailAPIView.as_view()),
+    path('list', TodoListAPIView.as_view()),
+    path('list/<int:pk>', TodoListRetrieveAPIView.as_view()),
 ]
