@@ -3,7 +3,7 @@ from rest_framework.generics import CreateAPIView, RetrieveAPIView, get_object_o
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import TodoList
+from .models import TodoList, TodoItem
 from .serializers import TodoListSerializer, TodoItemSerializer
 
 
@@ -36,6 +36,18 @@ class TodoListRetrieveAPIView(APIView):
         return Response(serializer.data)
 
 
-class TodoListAPIView(RetrieveAPIView):
-    serializer_class = TodoListSerializer
-    queryset = TodoList.objects.prefetch_related('todo_items')
+class TodoListItemAPIView(APIView):
+
+    def put(self, request, list_id, pk):
+        todo_list_item = get_object_or_404(TodoItem, todo_list_id=list_id, pk=pk)
+        serializer = TodoItemSerializer(instance=todo_list_item, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            instance = serializer.save()
+            serializer = TodoItemSerializer(instance=instance)
+        return Response(serializer.data)
+
+    def delete(self, request, list_id, pk):
+        todo_list_item = get_object_or_404(TodoItem, todo_list_id=list_id, pk=pk)
+        todo_list_item.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+

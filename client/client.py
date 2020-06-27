@@ -14,7 +14,7 @@ Available commands:
 import sys
 import pprint
 
-from todo_list import create_todo_list, view_todo_list, delete_todo_list, add_list_item
+from todo_list import create_todo_list, view_todo_list, delete_todo_list, add_list_item, update_list_item
 
 
 def main():
@@ -47,6 +47,20 @@ def main():
             pprint.pprint(add_list_item(sys.argv[2], sys.argv[3]))
         except IndexError:
             print("The id is required for todo list view")
+            exit(0)
+
+    elif action == 'update-list-item':
+        try:
+            pprint.pprint(update_list_item(sys.argv[2], sys.argv[3], sys.argv[4]))
+        except IndexError:
+            print("The list id and item id are required for todo item update")
+            exit(0)
+
+    elif action == 'delete-list-item':
+        try:
+            pprint.pprint(update_list_item(sys.argv[2], sys.argv[3]))
+        except IndexError:
+            print("The list id and item id are required for todo item delete")
             exit(0)
     else:
         print("Invalid argument")
