@@ -13,8 +13,9 @@ class TodoItemSerializer(serializers.Serializer):
 
 
 class TodoListSerializer(serializers.ModelSerializer):
-    todo_items = TodoItemSerializer(source='todo_items', many=True, read_only=True)
+    id = serializers.ReadOnlyField()
+    todo_items = TodoItemSerializer(many=True, read_only=True)
 
     class Meta:
         model = TodoList
-        fields = ('list_name', 'todo_items', )
+        fields = ('id', 'list_name', 'todo_items', )
