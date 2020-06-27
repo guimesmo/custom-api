@@ -1,43 +1,11 @@
-from database.models import Model
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.db import models
 
 
-def encrypt(password):
-    return password
+class User(AbstractBaseUser):
+    email = models.EmailField(max_length=255, unique=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
 
-
-class User(Model):
-    def __init__(self, email, first_name, last_name):
-        self.email = email
-        self.first_name = first_name
-        self.last_name = last_name
-        self.password = None
-
-    def as_dict(self):
-        fields = ['email', 'first_name', 'last_name', 'password']
-        output = dict()
-        for f in fields:
-            output[f] = getattr(self, f)
-        return output
-
-    def set_password(self, password):
-        self.password = encrypt(password)
-
-    def delete(self):
-        return
-
-    @staticmethod
-    def authenticate(email, password):
-        return User
-
-    @staticmethod
-    def find(**kwargs):
-        return [User]
-
-    @staticmethod
-    def get(**kwargs):
-        return User
-
-    @staticmethod
-    def create(**kwargs):
-        return User
-
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
