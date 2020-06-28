@@ -25,7 +25,9 @@ def view_todo_list(list_id):
 def delete_todo_list(list_id):
     response = requests.delete(f'{TODO_LIST_URL}/{list_id}',
                                headers=get_headers_auth())
-    return response.status_code == 204
+    if response.status_code == 204:
+        return "Deleted successfully"
+    return response.json()
 
 
 def add_list_item(list_id, item_name):
@@ -51,6 +53,8 @@ def update_list_item(list_id, list_item_id, item_name):
 def delete_list_item(list_id, list_item_id):
     response = requests.delete(f"{TODO_LIST_URL}/{list_id}/{list_item_id}",
                                headers=get_headers_auth())
-    return response.status_code == 204
+    if response.status_code == 204:
+        return "Deleted successfully"
+    return response.json()
 
 

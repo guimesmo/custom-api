@@ -17,7 +17,9 @@ def register_user(email, password, first_name, last_name):
     response = requests.post(USER_REGISTER_URL,
                              data=json.dumps(payload),
                              headers=JSON_HEADERS)
-    return response.status_code == 204
+    if response.status_code == 204:
+        return "User registered."
+    return response.json()
 
 
 def login_user(email, password):
