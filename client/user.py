@@ -18,19 +18,21 @@ def register_user(email, password, first_name, last_name):
     response = requests.post(USER_REGISTER_URL,
                              data=json.dumps(payload),
                              headers=JSON_HEADERS)
-    return response.json()
+    return response.status_code == 204
 
 
 def login_user(email, password):
     payload = {
-        "email": email,
+        "username": email,
         "password": password
     }
+    print(payload)
     response = requests.post(USER_LOGIN_URL,
-                             data=payload,
+                             data=json.dumps(payload),
                              headers=JSON_HEADERS)
     if response.status_code != 200:
         print("Login failed")
+        print(response.content)
         return
 
     user_token = response.json().get('token')
