@@ -14,8 +14,8 @@ Available commands:
 import pprint
 
 from common import parse_args, ValidationError, TokenError
-from todo_list import create_todo_list, view_todo_list, delete_todo_list, add_list_item, update_list_item, \
-    delete_list_item
+from todo_list import create_todo_list, view_todo_list, delete_todo_list,\
+    add_list_item, update_list_item, delete_list_item
 from user import login_user, register_user
 
 

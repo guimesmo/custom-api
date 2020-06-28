@@ -43,5 +43,8 @@ def store_token(token):
 
 
 def load_token():
-    with open(TOKEN_FILE, 'r') as of:
-        return of.read()
+    try:
+        with open(TOKEN_FILE, 'r') as of:
+            return of.read()
+    except FileNotFoundError:
+        return
