@@ -83,12 +83,6 @@ def delete_list_item():
 
 
 def main():
-    try:
-        action = parse_args(1)[0]
-    except ValidationError:
-        print("Missing action")
-        return
-
     available_actions = {
         'register-user': register_user_action,
         'login': login_user_action,
@@ -99,6 +93,13 @@ def main():
         'update-list-item': update_list_item_action,
         'delete-list-item': delete_list_item,
     }
+    try:
+        action = parse_args(1)[0]
+    except ValidationError:
+        print("Missing action:")
+        for ac in available_actions.keys():
+            print(ac)
+        return
 
     executable_action = available_actions.get(action)
     if not executable_action:
