@@ -14,7 +14,8 @@ Available commands:
 import pprint
 
 from common import parse_args, ValidationError, TokenError
-from todo_list import create_todo_list, view_todo_list, delete_todo_list, add_list_item, update_list_item
+from todo_list import create_todo_list, view_todo_list, delete_todo_list, add_list_item, update_list_item, \
+    delete_list_item
 from user import login_user, register_user
 
 
@@ -74,10 +75,10 @@ def update_list_item_action():
         print("The list id and item id are required for todo item update")
 
 
-def delete_list_item():
+def delete_list_item_action():
     try:
         args = parse_args(2, 1)
-        pprint.pprint(update_list_item(*args))
+        pprint.pprint(delete_list_item(*args))
     except ValidationError:
         print("The list id and item id are required for todo item delete")
 
@@ -91,7 +92,7 @@ def main():
         'delete-list': delete_list_action,
         'add-list-item': add_list_item_action,
         'update-list-item': update_list_item_action,
-        'delete-list-item': delete_list_item,
+        'delete-list-item': delete_list_item_action,
     }
     try:
         action = parse_args(1)[0]

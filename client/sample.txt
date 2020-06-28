@@ -1,0 +1,10 @@
+python client.py register-user user@email.com SomePassword "User fst name" "Last name"
+python client.py login  user@email.com SomePassword
+python client.py create-list "Sample Todo List"
+python client.py view-list 1
+python client.py add-list-item 1 "Sample TODO item"
+python client.py view-list 1
+python client.py update-list-item 1 1 "Sample name Changed"
+python client.py view-list 1
+python client.py delete-list-item 1 1
+python client.py delete-list 1
