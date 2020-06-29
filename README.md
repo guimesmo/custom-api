@@ -1,7 +1,7 @@
 # Django API and client examples
 
 ### Running the server
-´´´
+```
 cd sever
 python3 -m venv venv
 source venv/bin/activate
@@ -14,7 +14,7 @@ python manage.py runserver
 `python manage.py test`
 
 ### Running the client
-´´´
+```
 cd client
 python3 -m venv venv
 source venv/bin/activate
